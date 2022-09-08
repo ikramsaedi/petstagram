@@ -20,8 +20,9 @@ function Loaf() {
 }
 
 async function getPosts() {
-    const response = await fetch("/api/posts");
-    console.log(response);
+    const response = await fetch("/api/v1/posts");
+    const body = await response.json();
+    console.log(body);
 }
 
 function Posts() {

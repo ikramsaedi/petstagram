@@ -3,7 +3,7 @@ module Api
     class PostsController < ApplicationController
       def index
         @posts = Post.all # gets all posts in db
-        render json:@posts
+        render json: @posts
       end
     
       def show
