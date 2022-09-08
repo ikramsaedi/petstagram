@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
+    getPosts();
     return (
         <>
             <h1>Hello World</h1>
@@ -18,11 +19,20 @@ function Loaf() {
     return <p>Loaf!!</p>;
 }
 
+async function getPosts() {
+    const response = await fetch("/api/posts");
+    console.log(response);
+}
+
+function Posts() {
+    return <></>;
+}
+
 ReactDOM.render(
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<App />} />
-            <Route path="Loaf" element={<Loaf />} />
+            <Route path="posts" element={<Loaf />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById("root"),
