@@ -1,16 +1,22 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails";
 import "./controllers/hello_controller.js";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-    getPosts();
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        getPosts().then((response) => setPosts(response));
+    });
+
     return (
         <>
-            <h1>Hello World</h1>
-            <p>LOAFLOAFLOAF</p>
+            {posts.map((post) => {
+                return <p>{post.caption}</p>;
+            })}
         </>
     );
 }
@@ -22,7 +28,7 @@ function Loaf() {
 async function getPosts() {
     const response = await fetch("/api/v1/posts");
     const body = await response.json();
-    console.log(body);
+    return body;
 }
 
 function Posts() {
