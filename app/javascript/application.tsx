@@ -1,6 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails";
 import "./controllers/hello_controller.js";
+import Posts from "./posts";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -17,6 +18,7 @@ function App() {
             {posts.map((post) => {
                 return <p>{post.caption}</p>;
             })}
+            <Posts />
         </>
     );
 }
@@ -31,15 +33,11 @@ async function getPosts() {
     return body;
 }
 
-function Posts() {
-    return <></>;
-}
-
 ReactDOM.render(
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<App />} />
-            <Route path="posts" element={<Loaf />} />
+            <Route path="posts" element={<App />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById("root"),

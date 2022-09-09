@@ -16,6 +16,12 @@ module.exports = {
             },
         ],
     },
+
+    // this means i can import across typescript files without specifying the file extension
+    // when importing ts files without the file extension, browser throws an error, but with the file extension, typescript threw an error
+    resolve: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+    },
     output: {
         filename: "[name].js",
         sourceMapFilename: "[name].js.map",
