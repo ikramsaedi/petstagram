@@ -2,7 +2,8 @@
 import "@hotwired/turbo-rails";
 import "./controllers/hello_controller.js";
 import Posts from "./pages/posts";
-import Post from "./pages/post";
+import Post from "./pages/show";
+import New from "./pages/new";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -24,10 +25,6 @@ function App() {
     );
 }
 
-function Loaf() {
-    return <p>Loaf!!</p>;
-}
-
 async function getPosts() {
     const response = await fetch("/api/v1/posts");
     const body = await response.json();
@@ -40,6 +37,7 @@ ReactDOM.render(
             <Route path="/" element={<App />} />
             <Route path="posts" element={<App />} />
             <Route path="posts/:id" element={<Post />} />
+            <Route path="posts/new" element={<New />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById("root"),

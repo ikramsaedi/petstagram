@@ -19,9 +19,9 @@ module Api
         @post  = Post.new(post_params)
     
         if(@post.save)
-          redirect_to @post
+          render json: @post
         else
-          render :new, status: :unprocessable_entity #this is a 422 status code
+          render json: @post.errors
         end
       end
     
