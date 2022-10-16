@@ -8,6 +8,7 @@ module Api
     
       def show
         @post = Post.find(params[:id]) # params = url params
+        render json: @post
       end
     
       def new

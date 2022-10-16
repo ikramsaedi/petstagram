@@ -39,7 +39,7 @@ ReactDOM.render(
         <Routes>
             <Route path="/" element={<App />} />
             <Route path="posts" element={<App />} />
-            <Route path="post" element={<Post />} />
+            <Route path="posts/:id" element={<Post />} />
         </Routes>
     </BrowserRouter>,
     document.getElementById("root"),
