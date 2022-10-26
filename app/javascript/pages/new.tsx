@@ -28,10 +28,8 @@ async function onSubmit() {
         }),
     };
     const response = await fetch("/api/v1/posts", requestOptions);
-    console.log("response", response);
     const body = await response.json();
-    console.log("body", body);
-    return body;
+    location.href = `${body.id}`;
 }
 
 export default NewPost;
