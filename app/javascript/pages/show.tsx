@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Post from "../components/Post";
 
 type Post = {
     caption: string;
     pictureUrl: string;
 };
 
-function Post() {
+function Show() {
     const { id } = useParams();
     const [post, setPost] = useState<Post | null>(null);
 
@@ -16,8 +17,14 @@ function Post() {
 
     return (
         <div>
-            <p>cat</p>
-            {post && <p>{post.caption}</p>}
+            <h1>Post</h1>
+            {post && (
+                <Post
+                    caption={post.caption}
+                    pictureUrl={post.pictureUrl}
+                    id={id}
+                />
+            )}
         </div>
     );
 }
@@ -28,4 +35,4 @@ async function getPost(id: string) {
     return body;
 }
 
-export default Post;
+export default Show;

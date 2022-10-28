@@ -2,8 +2,9 @@
 import "@hotwired/turbo-rails";
 import "./controllers/hello_controller.js";
 import Posts from "./pages/posts";
-import Post from "./pages/show";
+import Show from "./pages/show";
 import New from "./pages/new";
+import Edit from "./pages/edit";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -36,7 +37,8 @@ ReactDOM.render(
         <Routes>
             <Route path="/" element={<App />} />
             <Route path="posts" element={<App />} />
-            <Route path="posts/:id" element={<Post />} />
+            <Route path="posts/:id" element={<Show />} />
+            <Route path="posts/:id/edit" element={<Edit />} />
             <Route path="posts/new" element={<New />} />
         </Routes>
     </BrowserRouter>,
