@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Post from "../components/Post";
-
-type Post = {
-    caption: string;
-    pictureUrl: string;
-};
+import PostComponent from "../components/Post";
+import { Post } from "../types/post";
 
 function Show() {
     const { id } = useParams();
@@ -19,7 +15,7 @@ function Show() {
         <div>
             <h1>Post</h1>
             {post && (
-                <Post
+                <PostComponent
                     caption={post.caption}
                     pictureUrl={post.pictureUrl}
                     id={id}
@@ -29,7 +25,7 @@ function Show() {
     );
 }
 
-async function getPost(id: string) {
+export async function getPost(id: string) {
     const response = await fetch(`/api/v1/posts/${id}`);
     const body = await response.json();
     return body;

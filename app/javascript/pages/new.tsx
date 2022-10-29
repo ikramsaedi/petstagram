@@ -1,24 +1,16 @@
 import React from "react";
+import PostForm from "../components/PostForm";
 
 function NewPost() {
     return (
         <>
-            <form>
-                <div>
-                    <label>PictureURL</label>
-                    <input type="text" id="pictureUrl"></input>
-                </div>
-                <div>
-                    <label>Caption</label>
-                    <input type="text" id="caption"></input>
-                </div>
-                <button onClick={onSubmit}> Submit! </button>
-            </form>
+            <h1>New Post</h1>
+            <PostForm onClick={onClick} />
         </>
     );
 }
 
-async function onSubmit() {
+async function onClick() {
     const pictureUrlInput = document.querySelector(
         "#pictureUrl",
     ) as HTMLInputElement;
