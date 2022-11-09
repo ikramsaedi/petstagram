@@ -13,12 +13,12 @@ function Edit() {
     return (
         <>
             <h1>Edit</h1>
-            {post && <PostForm onClick={onClick} post={post} />}
+            {post && <PostForm onClick={() => onClick(id)} post={post} />}
         </>
     );
 }
 
-async function onClick() {
+async function onClick(id: string) {
     const pictureUrlInput = document.querySelector(
         "#pictureUrl",
     ) as HTMLInputElement;
@@ -27,16 +27,17 @@ async function onClick() {
     ) as HTMLInputElement;
 
     const requestOptions = {
-        method: "POST",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             pictureUrl: pictureUrlInput.value,
             caption: captionInput.value,
         }),
     };
-    const response = await fetch("/api/v1/posts", requestOptions);
+    const response = await fetch(`/api/v1/posts/${id}`, requestOptions);
     const body = await response.json();
-    location.href = `${body.id}`;
+    // HACK: this is not good practice and I shouldn't do this!
+    location.href = location.href.replace("/edit", "");
 }
 
 export default Edit;

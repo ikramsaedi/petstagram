@@ -33,8 +33,9 @@ module Api
         @post = Post.find(params[:id])
     
         if @post.update(post_params)
-          redirect_to @post
+          render json: @post
         else
+          # i don;t render json here
           render :edit, status: :unprocessable_entity
         end
       end

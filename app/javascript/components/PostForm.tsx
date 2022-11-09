@@ -7,7 +7,6 @@ interface Props {
 }
 
 function PostForm(props: Props) {
-    const post = props.post ?? "";
     return (
         <form>
             <div>
