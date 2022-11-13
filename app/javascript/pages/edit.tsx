@@ -27,9 +27,6 @@ function onClick(id: string) {
     ) as HTMLInputElement;
 
     updatePost(pictureUrlInput.value, captionInput.value, id);
-    // .then((response) => {
-    //     if (response) location.href = location.href.replace("/edit", "");
-    // });
 }
 async function updatePost(pictureUrl: string, captionUrl: string, id: string) {
     const requestOptions = {
@@ -40,13 +37,15 @@ async function updatePost(pictureUrl: string, captionUrl: string, id: string) {
             caption: captionUrl,
         }),
     };
-    await fetch(`/api/v1/posts/${id}`, requestOptions)
-        .then((response) => {
-            handleErrors(response);
-        })
-        .catch((err) => {
-            console.error("Something went wrong:", err);
-        });
+
+    try {
+        const response = await fetch(`/api/v1/posts/${id}`, requestOptions);
+        handleErrors(response);
+        // HACK: redirect
+        location.href = location.href.replace("/edit", "");
+    } catch (err) {
+        console.error("Something went wrong:", err);
+    }
 }
 
 function handleErrors(response: Response) {
