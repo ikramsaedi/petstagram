@@ -42,9 +42,13 @@ module Api
     
       def destroy
         @post = Post.find(params[:id])
-        @post.destroy
-    
-        redirect_to root_path, status: :see_other
+
+        if @post.destroy(post_params)
+          render json: @post
+        else
+          # i don;t render json here
+          render :destroy, status: :unprocessable_entity
+        end
       end
     
       private
