@@ -42,13 +42,8 @@ module Api
     
       def destroy
         @post = Post.find(params[:id])
-
-        if @post.destroy(post_params)
-          render json: @post
-        else
-          # i don;t render json here
-          render :destroy, status: :unprocessable_entity
-        end
+        @post.comments.destroy_all
+        @post.destroy
       end
     
       private

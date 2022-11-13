@@ -3,6 +3,7 @@ import { getPost } from "./show";
 import { useParams } from "react-router-dom";
 import { Post as PostType } from "../types/post";
 import PostForm from "../components/PostForm";
+import handleErrors from "../lib/handleErrors";
 
 function Edit() {
     const { id } = useParams();
@@ -46,13 +47,6 @@ async function updatePost(pictureUrl: string, captionUrl: string, id: string) {
     } catch (err) {
         console.error("Something went wrong:", err);
     }
-}
-
-function handleErrors(response: Response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
 }
 
 export default Edit;
