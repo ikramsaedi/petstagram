@@ -18,7 +18,7 @@ function Edit() {
     );
 }
 
-async function onClick(id: string) {
+function onClick(id: string) {
     const pictureUrlInput = document.querySelector(
         "#pictureUrl",
     ) as HTMLInputElement;
@@ -26,18 +26,34 @@ async function onClick(id: string) {
         "#caption",
     ) as HTMLInputElement;
 
+    updatePost(pictureUrlInput.value, captionInput.value, id);
+    // .then((response) => {
+    //     if (response) location.href = location.href.replace("/edit", "");
+    // });
+}
+async function updatePost(pictureUrl: string, captionUrl: string, id: string) {
     const requestOptions = {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            pictureUrl: pictureUrlInput.value,
-            caption: captionInput.value,
+            pictureUrl: pictureUrl,
+            caption: captionUrl,
         }),
     };
-    const response = await fetch(`/api/v1/posts/${id}`, requestOptions);
-    const body = await response.json();
-    // HACK: this is not good practice and I shouldn't do this!
-    location.href = location.href.replace("/edit", "");
+    await fetch(`/api/v1/posts/${id}`, requestOptions)
+        .then((response) => {
+            handleErrors(response);
+        })
+        .catch((err) => {
+            console.error("Something went wrong:", err);
+        });
+}
+
+function handleErrors(response: Response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
 }
 
 export default Edit;

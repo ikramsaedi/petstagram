@@ -12,6 +12,8 @@ function Post(props: Props) {
             <p>Caption: {props.caption}</p>
             <p>PictureURL: {props.pictureUrl}</p>
             <a href={`/posts/${props.id}/edit`}>Edit</a>
+            <br />
+            <a href={`/posts/${props.id}/delete`}>Delete</a>
         </>
     );
 }
